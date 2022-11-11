@@ -1,11 +1,16 @@
-from traceback import print_tb
+#TODO: save data into a csv, read the csv using the other cli function
+
 import psutil
 import logging
 import time
 
-def monitor_process_and_system(pid: int, ttl: int) -> None:
+def save_data_into_csv(data: list) -> str:
+    pass
+
+def monitor_process_and_system(pid: int, ttl: int) -> list:
     if not psutil.pid_exists(pid):
         logging.info(f"process with pid {pid} not found")
+        return
     
     proc = psutil.Process(pid=pid)
 
@@ -15,8 +20,6 @@ def monitor_process_and_system(pid: int, ttl: int) -> None:
                 memmory = proc.memory_info().data 
                 cpu = proc.cpu_percent(interval=None)
                 
-                print(f"MEM = {memmory}, CPU = {round(cpu,2)}%")
-
                 time.sleep(ttl)
     except KeyboardInterrupt:
         logging.info(f"user requested to shutdown, finishing the application")
