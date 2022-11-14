@@ -12,9 +12,10 @@ def collect(pid: int, ttl: int):
         # ,filename=f"proc-monitoring-{datetime.datetime.now()}.log"       
     )
     collected_data = proc_monitor.monitor_process_and_system(pid, ttl)
-    csv_name = proc_monitor.save_data_into_csv(collected_data)
 
-    logging.info(f"collected data saved into {csv_name}")
+    if collected_data != None:
+        csv_name = proc_monitor.save_data_into_csv(collected_data)
+        logging.info(f"collected data saved into {csv_name}")
 
 @app.command()
 def view(filename: str):
