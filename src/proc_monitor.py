@@ -38,7 +38,7 @@ def monitor_process_and_system(pid: int, ttl: int) -> list:
                 cpu = proc.cpu_percent(interval=None)
                 wrote = proc.io_counters().write_bytes
                 read = proc.io_counters().read_bytes
-                timestamp = datetime.datetime.now()
+                timestamp = datetime.datetime.timestamp(datetime.datetime.now())
                 
                 new_data = [
                     timestamp,

@@ -1,5 +1,5 @@
 import typer
-from src import proc_monitor
+from src import proc_monitor, data_analysis
 import logging
 import datetime
 
@@ -19,7 +19,9 @@ def collect(pid: int, ttl: int):
 
 @app.command()
 def view(filename: str):
-    pass
+    dataset = data_analysis.create_dataset_from_file(filename)
+    data_analysis.show_statistical_information(dataset)
+    data_analysis.show_plots(dataset)
 
 if __name__ == "__main__":
     app()
